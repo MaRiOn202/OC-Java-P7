@@ -1,7 +1,8 @@
 package com.openclassrooms.poseidon.controllers;
 
-import com.nnk.springboot.domain.User;
-import com.nnk.springboot.repositories.UserRepository;
+
+import com.openclassrooms.poseidon.domain.User;
+import com.openclassrooms.poseidon.repositories.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

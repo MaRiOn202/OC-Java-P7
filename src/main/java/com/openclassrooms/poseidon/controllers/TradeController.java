@@ -1,6 +1,7 @@
 package com.openclassrooms.poseidon.controllers;
 
-import com.nnk.springboot.domain.Trade;
+
+import com.openclassrooms.poseidon.domain.Trade;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

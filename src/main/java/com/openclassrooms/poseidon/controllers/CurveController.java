@@ -1,6 +1,7 @@
 package com.openclassrooms.poseidon.controllers;
 
-import com.nnk.springboot.domain.CurvePoint;
+
+import com.openclassrooms.poseidon.domain.CurvePoint;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
