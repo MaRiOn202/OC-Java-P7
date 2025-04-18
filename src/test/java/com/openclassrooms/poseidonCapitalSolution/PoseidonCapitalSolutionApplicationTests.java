@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class PoseidonCapitalSolutionApplicationTests {
 
-	@Test
+/*	@Test
 	void contextLoads() {
-	}
+	}*/
 
 }

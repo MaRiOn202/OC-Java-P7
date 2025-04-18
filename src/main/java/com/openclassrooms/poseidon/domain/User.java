@@ -2,8 +2,13 @@ package com.openclassrooms.poseidon.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 
+//@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "users")
 public class User {
@@ -13,6 +18,7 @@ public class User {
     @NotBlank(message = "Username is mandatory")
     private String username;
     @NotBlank(message = "Password is mandatory")
+    @ToString.Exclude
     private String password;
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
