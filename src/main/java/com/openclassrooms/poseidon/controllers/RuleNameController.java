@@ -1,7 +1,7 @@
 package com.openclassrooms.poseidon.controllers;
 
 
-import com.openclassrooms.poseidon.domain.RuleName;
+import com.openclassrooms.poseidon.entity.RuleName;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

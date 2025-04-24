@@ -1,6 +1,6 @@
 package com.openclassrooms.poseidon.service;
 
-import com.openclassrooms.poseidon.domain.User;
+import com.openclassrooms.poseidon.entity.User;
 
 import java.util.List;
 

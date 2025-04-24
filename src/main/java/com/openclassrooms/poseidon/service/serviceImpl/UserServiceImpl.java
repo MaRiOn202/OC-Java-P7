@@ -1,6 +1,6 @@
 package com.openclassrooms.poseidon.service.serviceImpl;
 
-import com.openclassrooms.poseidon.domain.User;
+import com.openclassrooms.poseidon.entity.User;
 import com.openclassrooms.poseidon.exception.UserNotFoundException;
 import com.openclassrooms.poseidon.repositories.UserRepository;
 import com.openclassrooms.poseidon.service.UserService;
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -65,6 +65,7 @@ public class UserServiceImpl implements UserService {
 
         }
         userRepository.save(existingUser);
+        log.info("Mise à jour du user : id={}, avec les nouvelles données user=[{}]", id, existingUser);
         return existingUser;
     }
 
@@ -72,6 +73,7 @@ public class UserServiceImpl implements UserService {
     public boolean deleteUser(Integer id) {
         User user = getUserById(id);
         userRepository.delete(user);
+        log.info("Suppression du user : {}", id);
         return true;
     }
 

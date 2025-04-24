@@ -1,7 +1,7 @@
 package com.openclassrooms.poseidon.controllers;
 
 
-import com.openclassrooms.poseidon.domain.User;
+import com.openclassrooms.poseidon.entity.User;
 import com.openclassrooms.poseidon.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

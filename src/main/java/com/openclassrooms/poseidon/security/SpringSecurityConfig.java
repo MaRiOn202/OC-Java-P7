@@ -35,7 +35,8 @@ public class SpringSecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        String generatedPassword = UUID.randomUUID().toString();
+        //String generatedPassword = UUID.randomUUID().toString();
+        String generatedPassword = "user";
         System.out.println("🛡️ Mot de passe généré (à copier-coller dans le login) : " + generatedPassword);
 
         UserDetails user = User.builder()
