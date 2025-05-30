@@ -19,13 +19,12 @@ import java.sql.Timestamp;
 @Table(name = "trade")
 public class
 Trade {
-    // TODO: Map columns in data table TRADE with corresponding java fields
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tradeId")
+    @Column(name = "trade_id")
+    private Integer id;
 
-    private Integer tradeId;
     @NotBlank(message = "Le champ Account doit être complété")
     @Size(max = 50, message = "Le champ Account ne doit pas dépasser 50 caractères")
     private String account;
@@ -34,19 +33,19 @@ Trade {
     @PositiveOrZero(message = "La quantité doit être positive ou nulle")
     private Double buyQuantity;
     private Double sellQuantity;
-    @NotNull
+    //@NotNull
     @DecimalMin(value = "0.0", message = "Le prix d'achat doit être positif ou nul")
     private Double buyPrice;
 
     private Double sellPrice;
     private String benchmark;
     //@Temporal(TemporalType.TIMESTAMP) // à voir
-    @NotBlank(message = "La date est obligatoire")
+    //@NotBlank(message = "La date est obligatoire")
     private Timestamp tradeDate;
     private String security;
-    @NotBlank(message = "Le statut est obligatoire")
+    //@NotBlank(message = "Le statut est obligatoire")
     private String status;
-    @NotBlank(message = "Le trader est obligatoire")
+    //@NotBlank(message = "Le trader est obligatoire")
     private String trader;
     private String book;
     @Size(max = 50)

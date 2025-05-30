@@ -1,68 +1,59 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<title>Home</title>
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<div class="col-6">
 
-		</div>
-		<div class="col-6 text-right">
-			<a href="/">Home</a>&nbsp;|&nbsp;<a href="/login">Login</a>
-		</div>
-	</div>
-	<div class="row"><h2>User List</h2></div>
-	<div class="row">
-		<a href="/user/add" class="btn btn-primary btn-sm">Add New</a>
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Full Name</th>
-					<th>User Name</th>
-					<th>Role</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="user : ${users}">
-					<td style="width: 10%" th:text="${user.id}"></td>
-					<td th:text="${user.fullname}"></td>
-					<td th:text="${user.username}"></td>
-					<td style="width: 25%" th:text="${user.role}"></td>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
-					<td style="width: 20%;" class="text-center">
-						<div class="d-flex justify-content-center align-items-center">
-							<a class="btn btn-sm btn-primary"
-							   th:href="@{/user/update/{id}(id=${user.id})}">Edit</a>
+<div class="container mt-3">
+    <div class="row">
+        <h2>User List</h2>
+    </div>
+    <div class="row mb-2">
+        <a href="/user/add" class="btn btn-primary btn-sm">Add New</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Full Name</th>
+            <th>User Name</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td style="width: 10%" th:text="${user.id}"></td>
+            <td th:text="${user.fullname}"></td>
+            <td th:text="${user.username}"></td>
+            <td style="width: 25%" th:text="${user.role}"></td>
 
-							<div style="margin-left:10px;">
-								<form th:action="@{/user/delete}" method="post"
-									  onsubmit="return confirm('Confirmer la suppression ?')">
-									<input type="hidden" name="id" th:value="${user.id}"/>
-									<!--<input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-									<button type="submit" class="btn btn-sm btn-danger">
-										🗑️ Delete
-									</button>
-								</form>
-							</div>
-						</div>
-					</td>
+            <td style="width: 20%;" class="text-center">
+                <div class="d-flex justify-content-center align-items-center">
+                    <a class="btn btn-sm btn-primary"
+                       th:href="@{/user/update/{id}(id=${user.id})}">Edit</a>
 
-					<!--					<td style="width: 15%" class="text-center">
-                                            <a th:href="@{/user/update/{id}(id=${user.id})}">Edit</a>&nbsp;|&nbsp;
-                                            <a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
-
-                                        </td>-->
-				</tr>
-			</tbody>
-		</table>
-	</div>
+                    <div style="margin-left:10px;">
+                        <form th:action="@{/user/delete/{id}(id=${user.id})}" method="post"
+                              onsubmit="return confirm('Confirmer la suppression ?')">
+                            <input type="hidden" name="id" th:value="${user.id}"/>
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                🗑️ Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

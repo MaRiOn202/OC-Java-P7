@@ -44,7 +44,7 @@ public class CurvePointServiceImpl implements CurvePointService {
     public CurvePoint getCurvePointById(Integer id) {
         log.info("Récupération de l'id : {}", id);
         return  curvePointRepository.findById(id)
-                .orElseThrow(() -> new CurvePointNotFoundException("Le point de courbe n'a pas été trouvé" + id));
+                .orElseThrow(() -> new CurvePointNotFoundException("Le point de courbe n'a pas été trouvé : " + id));
     }
 
     @Transactional

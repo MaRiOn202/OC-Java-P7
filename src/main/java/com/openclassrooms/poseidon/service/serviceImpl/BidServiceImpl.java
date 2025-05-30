@@ -29,6 +29,7 @@ public class BidServiceImpl implements BidService {
 
     @Override
     public List<Bid> getAllBids() {
+
         return bidRepository.findAll();
     }
 
@@ -44,7 +45,7 @@ public class BidServiceImpl implements BidService {
     public Bid getBidById(Integer id) {
         log.info("Récupération de l'id : {}", id);
         return bidRepository.findById(id)
-                .orElseThrow(() -> new BidNotFoundException("L'offre n'a pas été trouvée" + id));
+                .orElseThrow(() -> new BidNotFoundException("L'offre n'a pas été trouvée : " + id));
     }
 
     @Transactional
@@ -53,9 +54,11 @@ public class BidServiceImpl implements BidService {
 
         // Est-ce qu'on peut modifier tout ? A voir + tard
         Bid existingBid = getBidById(id);
+
         existingBid.setAccount(bid.getAccount());
         existingBid.setType(bid.getType());
         existingBid.setBidQuantity(bid.getBidQuantity());
+
         existingBid.setAskQuantity(bid.getAskQuantity());
         existingBid.setBid(bid.getBid());
         existingBid.setAsk(bid.getAsk());

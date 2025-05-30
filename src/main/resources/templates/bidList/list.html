@@ -11,33 +11,34 @@
 <!-- Navbar -->
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
+
 <div class="container mt-3">
 
     <div class="row">
-        <h2>Curve Point List</h2>
+        <h2>Bid List</h2>
     </div>
     <div class="row mb-2">
-        <a href="/curvePoint/add" class="btn btn-primary btn-sm">Add New</a>
+        <a href="/bidList/add" class="btn btn-primary btn-sm">Add New</a>
     </div>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>Id</th>
-            <th>CurvePointId</th>
-            <th>Term</th>
-            <th>Value</th>
+            <th>Account</th>
+            <th>Type</th>
+            <th>Bid Quantity</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="curvePoint : ${curvePoints}">
-            <td style="width: 10%" th:text="${curvePoint.id}"></td>
-            <td th:text="${curvePoint.id}"></td>
-            <td th:text="${curvePoint.term}"></td>
-            <td th:text="${curvePoint.value}"></td>
+        <tr th:each="bid : ${bids}">
+            <td style="width: 10%" th:text="${bid.id}"></td>
+            <td th:text="${bid.account}"></td>
+            <td th:text="${bid.type}"></td>
+            <td th:text="${bid.bidQuantity}"></td>
             <td style="width: 15%" class="text-center">
-                <a th:href="@{/curvePoint/update/{id}(id=${curvePoint.id})}">Edit</a>&nbsp;|&nbsp;
-                <form th:action="@{/curvePoint/delete/{id}(id=${curvePoint.id})}" method="post" style="display:inline;">
+                <a th:href="@{/bidList/update/{id}(id=${bid.id})}">Edit</a>&nbsp;|&nbsp;
+                <form th:action="@{/bidList/delete/{id}(id=${bid.id})}" method="post" style="display:inline;">
                     <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Delete</button>
                 </form>
             </td>

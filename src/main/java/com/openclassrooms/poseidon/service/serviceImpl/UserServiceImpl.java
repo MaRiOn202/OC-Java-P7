@@ -28,6 +28,8 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+
     @Override
     public List<User> getAllUsers() {
 
@@ -49,6 +51,7 @@ public class UserServiceImpl implements UserService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        log.info("Création d'un nouvel utilisateur : {}", user.getUsername());
         return userRepository.save(user);
     }
 
@@ -56,13 +59,20 @@ public class UserServiceImpl implements UserService {
     public User updateUser(Integer id, User userUpdated) {
 
         User existingUser = getUserById(id);
+
+        User userWithSameName = userRepository.findByUsername(userUpdated.getUsername());
+        if (userWithSameName != null && !userWithSameName.getId().equals(id)) {
+            throw new IllegalArgumentException("Le Username est déjà utilisé !");
+        }
+
         existingUser.setUsername(userUpdated.getUsername());
         existingUser.setFullname(userUpdated.getFullname());
-        existingUser.setRole(userUpdated.getRole());
+        existingUser.setRole(userUpdated.getRole().trim());   // enlève les espaces
 
         if (userUpdated.getPassword() != null && !userUpdated.getPassword().isEmpty()) {
-            existingUser.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
-
+            if (!existingUser.getPassword().equals(userUpdated.getPassword())) {
+                existingUser.setPassword(passwordEncoder.encode(userUpdated.getPassword()));
+            }
         }
         userRepository.save(existingUser);
         log.info("Mise à jour du user : id={}, avec les nouvelles données user=[{}]", id, existingUser);

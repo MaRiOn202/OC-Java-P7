@@ -1,12 +1,11 @@
-/*
 package com.openclassrooms.poseidon.security;
 
-import com.openclassrooms.poseidon.domain.User;
+import com.openclassrooms.poseidon.entity.User;
 import com.openclassrooms.poseidon.repositories.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,12 +20,15 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     private static final Logger log = LoggerFactory.getLogger(CustomUserDetailsService.class);
 
+
+
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         log.info("Tentative ds loadUserByUsername : {}", username);
@@ -34,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByUsername(username);
 
         if (user == null ) {
-            log.error("Utilisateur non trouvé avec l'email : {}", username);
+            log.error("Utilisateur non trouvé avec le username : {}", username);
             throw new UsernameNotFoundException("Utilisateur non trouvé avec le username : " + username);
         }
         log.info("Utilisateur trouvé : {}", username);
@@ -46,17 +48,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         );
     }
 
+    // on convertit les rôles en authorities
     private List<GrantedAuthority> getGrantAuthorities(String role) {
 
         List<GrantedAuthority> auth = new ArrayList<>();
 
-        auth.add(new SimpleGrantedAuthority(("ROLE_USER")));
-
-        if (role.equals("ADMIN")) {
-              auth.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        }
+        auth.add(new SimpleGrantedAuthority(("ROLE_" + role)));
 
         return auth;
     }
 }
-*/

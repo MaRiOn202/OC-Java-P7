@@ -1,4 +1,4 @@
-package com.openclassrooms.poseidon.controllers;
+/*package com.openclassrooms.poseidon.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,14 +10,16 @@ public class HomeController
 	@RequestMapping("/")
 	public String home(Model model)
 	{
+
 		return "home";
 	}
 
 	@RequestMapping("/admin/home")
 	public String adminHome(Model model)
 	{
-		return "redirect:/bidList/list";
+
+		return "bidList/list";
 	}
 
 
-}
+}*/

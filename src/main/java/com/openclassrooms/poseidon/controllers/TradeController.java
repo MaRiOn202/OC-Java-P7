@@ -14,7 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 
 @Controller
@@ -25,38 +26,44 @@ public class TradeController {
 
     private static final Logger log = LoggerFactory.getLogger(TradeController.class);
 
-// ????
-    //@RequestMapping("/trade/list")
+
     @GetMapping("/trade/list")
-    public String home(Model model)
+    public String home(Model model, Principal principal)
     {
-        // TODO: find all Trade, add to model
+        if (principal == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("user", principal.getName());
         model.addAttribute("trades", tradeService.getAllTrades());
         return "trade/list";
     }
 
     @GetMapping("/trade/add")
-    public String addTrade(Trade bid) {
+    public String addTrade(Trade trade, Model model, Principal principal) {
+
+        model.addAttribute("user", principal.getName());
         log.info("Accès à la page d'ajout de trade");
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
-    public String validate(@Valid Trade trade, BindingResult result, Model model) {
+    public String validate(@Valid Trade trade, BindingResult result, Model model, Principal principal) {
 
-        // TODO: check data valid and save to db, after saving return Trade list
-        if (!result.hasErrors()) {
-           tradeService.createTrade(trade);
-           model.addAttribute("trades", tradeService.getAllTrades());
-           return "redirect:/trade/list";
+        model.addAttribute("user", principal.getName());
+        if (result.hasErrors()) {
+            log.error("Validation erreur : {}", result.getAllErrors());
+            return "trade/add";
         }
-        return "trade/add";
+        tradeService.createTrade(trade);
+        model.addAttribute("trades", tradeService.getAllTrades());
+        return "redirect:/trade/list";
+
     }
 
     @GetMapping("/trade/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model, Principal principal) {
 
-        // TODO: get Trade by Id and to model then show to the form
+        model.addAttribute("user", principal.getName());
         Trade trade = tradeService.getTradeById(id);
         model.addAttribute("trade", trade);
         return "trade/update";
@@ -64,9 +71,9 @@ public class TradeController {
 
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
-                             BindingResult result, Model model) {
+                             BindingResult result, Model model, Principal principal) {
 
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
+        model.addAttribute("user", principal.getName());
         if (result.hasErrors()) {
            return "trade/update";
         }
@@ -76,16 +83,10 @@ public class TradeController {
     }
 
     @PostMapping("/trade/delete/{id}")
-    public String deleteTrade(@PathVariable("id") Integer id, Model model) {
+    public String deleteTrade(@PathVariable("id") Integer id, Model model, Principal principal) {
 
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
-        try {
-            tradeService.deleteTrade(id);
-        } catch (TradeNotFoundException e) {
-            log.info("Erreur lors de la suppression du trade : {}", e.getMessage());
-            model.addAttribute("error", "Trade introuvable");
-            return "error";
-        }
+        model.addAttribute("user", principal.getName());
+        tradeService.deleteTrade(id);
         //model.addAttribute("trades", tradeService.getAllTrades()); // à suppr car redirect ne conserve pas le model
         return "redirect:/trade/list";
     }

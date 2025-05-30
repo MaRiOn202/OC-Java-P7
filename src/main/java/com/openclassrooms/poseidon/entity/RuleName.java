@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.Objects;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,11 +16,10 @@ import lombok.*;
 @ToString(exclude = {"sqlStr", "sqlPart"})
 @Table(name = "rulename")
 public class RuleName {
-    // TODO: Map columns in data table RULENAME with corresponding java fields
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ruleNameId")
+    @Column(name = "id")
     private Integer id;
 
     @NotBlank(message = "Le nom ne peut pas être vide")
@@ -34,11 +35,6 @@ public class RuleName {
     private String sqlStr;
     @Size(max = 500, message = "Le champ SQL Part ne peut pas dépasser 500 caractères")
     private String sqlPart;
-
-
-
-
-
 
 
 }

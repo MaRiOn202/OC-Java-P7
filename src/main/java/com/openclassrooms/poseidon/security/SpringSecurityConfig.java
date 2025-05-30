@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +25,12 @@ import java.util.UUID;
 @EnableWebSecurity
 public class SpringSecurityConfig {
 
-/*    @Autowired
-    private CustomUserDetailsService customUserDetailsService;*/
+
+    private final CustomUserDetailsService customUserDetailsService;
+
+    public SpringSecurityConfig(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
+    }
 
 
     @Bean
@@ -33,52 +39,46 @@ public class SpringSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        //String generatedPassword = UUID.randomUUID().toString();
-        String generatedPassword = "user";
-        System.out.println("🛡️ Mot de passe généré (à copier-coller dans le login) : " + generatedPassword);
 
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder.encode(generatedPassword))
-                .roles("USER")
-                .build();
 
-        return new InMemoryUserDetailsManager(user);
-    }
-     // à faire plus tard avec un admin test 
-/*
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeHttpRequests((authorize) ->
-                        authorize
-                                .requestMatchers("/static").permitAll()
-                                .requestMatchers("/user/**").permitAll()
-                                .requestMatchers("/bidList/**").permitAll()
-                                .requestMatchers("/curvePoint/**").permitAll()
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/login").permitAll()
-                                .requestMatchers("/secure/**").permitAll()
-                                .requestMatchers("/rating/**").permitAll()
-                                .requestMatchers("/ruleName/**").permitAll()
-                                .requestMatchers("/trade/**").permitAll()
 
+        http
+                .authorizeHttpRequests( authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/", "/login", "/css/**","/images/**", "/static/**").permitAll()
+                                .requestMatchers("/trade/**", "/rating/**", "/ruleName/**",
+                                        "/bidList/**", "/curvePoint/**").authenticated()
+                                .requestMatchers("/user/**").hasRole("ADMIN")
+                                .requestMatchers("/**").hasAnyRole("USER","ADMIN")
+                                //.requestMatchers("/admin/**", "/user/**").hasRole("ADMIN")
+                                .anyRequest().authenticated()
+                        )
+                .formLogin(formLogin ->
+                        formLogin
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/trade/list", true)
+                                .failureUrl("/login?error=true")
+                                .permitAll()
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
-                .securityContext(securityContext -> securityContext.securityContextRepository(new HttpSessionSecurityContextRepository()
-                ));
+                .logout(LogoutConfigurer::permitAll   // méthode de référence à la place de la lambda
+                )
+                .sessionManagement(session ->
+                        session
+                                .sessionCreationPolicy(SessionCreationPolicy.NEVER))
+                ;
+
         return http.build();
     }
 
+
+
     @Bean
-    public AuthenticationManager auth(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
+    public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
         return authenticationManagerBuilder.build();
-    }*/
-
+    }
 
 }

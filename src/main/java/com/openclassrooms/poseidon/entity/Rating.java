@@ -15,11 +15,10 @@ import lombok.*;
 @ToString(exclude = {"orderNumber"})
 @Table(name = "rating")
 public class Rating {
-    // TODO: Map columns in data table RATING with corresponding java fields
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ratingId")
+    @Column(name = "rating")
     private Integer id;
 
     @NotBlank(message = "Le champ Moody's Rating ne peut pas être vide")
