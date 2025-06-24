@@ -1,4 +1,4 @@
-package com.openclassrooms.poseidonCapitalSolution;
+package com.openclassrooms.poseidon;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

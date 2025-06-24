@@ -1,22 +1,18 @@
-<h1 align="center">Welcome to Poseidon 👋</h1>
+<h1>Welcome to Poseidon 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 </p>
 
-Poseidon est une application de .... 
+Poseidon est une application permettant de gérer des transactions financières.   
  
-Avec Poseidon, vous pouvez :
-* 
-* 
-* 
-*   
 
-### 🏠 [Homepage](https://github.com/MaRiOn202/OC-Java-P7)
+
+## 🏠 [Homepage](https://github.com/MaRiOn202/OC-Java-P7)
 
 ## 👷 Technical:
 
 1. Spring Boot 3.1.0
-2. Java 17
+2. Java 19
 3. Thymeleaf
 4. Bootstrap v.4.3.1
 

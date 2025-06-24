@@ -1,6 +1,6 @@
 package com.openclassrooms.poseidon.repositories;
 
-import com.openclassrooms.poseidon.domain.RuleName;
+import com.openclassrooms.poseidon.entity.RuleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
