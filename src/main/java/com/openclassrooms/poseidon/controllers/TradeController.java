@@ -2,7 +2,6 @@ package com.openclassrooms.poseidon.controllers;
 
 
 import com.openclassrooms.poseidon.entity.Trade;
-import com.openclassrooms.poseidon.exception.TradeNotFoundException;
 import com.openclassrooms.poseidon.service.TradeService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;

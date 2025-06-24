@@ -16,5 +16,5 @@ public interface UserService {
 
     boolean deleteUser(Integer id);
 
-    User getUserByUsername(String username);
+    //User getUserByUsername(String username);
 }

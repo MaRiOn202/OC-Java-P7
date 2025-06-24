@@ -45,7 +45,7 @@ public class TradeServiceImpl implements TradeService {
     public Trade getTradeById(Integer id) {
         log.info("Récupération de l'id : {}", id);
         return tradeRepository.findById(id)
-                .orElseThrow(() -> new TradeNotFoundException("Le trade n'a pas été trouvé" + id));
+                .orElseThrow(() -> new TradeNotFoundException("Le trade n'a pas été trouvé : " + id));
     }
 
     @Transactional
@@ -60,8 +60,8 @@ public class TradeServiceImpl implements TradeService {
         existingTrade.setType(trade.getType());
         existingTrade.setBuyQuantity(trade.getBuyQuantity());
         existingTrade.setSellQuantity(trade.getSellQuantity());
-        //existingTrade.setBuyPrice(trade.getBuyPrice());
-        //existingTrade.setSellPrice(trade.getSellPrice());
+        existingTrade.setBuyPrice(trade.getBuyPrice());
+        existingTrade.setSellPrice(trade.getSellPrice());
         existingTrade.setBenchmark(trade.getBenchmark());
         existingTrade.setTradeDate(existingTrade.getTradeDate()); //current date
         existingTrade.setSecurity(trade.getSecurity());

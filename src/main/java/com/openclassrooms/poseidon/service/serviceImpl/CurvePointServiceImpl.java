@@ -51,10 +51,8 @@ public class CurvePointServiceImpl implements CurvePointService {
     @Override
     public CurvePoint updateCurvePoint(Integer id, CurvePoint curvePoint) {
 
-        // en commentaire pas update
         CurvePoint existingCurvePoint = getCurvePointById(id);
 
-        existingCurvePoint.setAsOfDate(curvePoint.getAsOfDate()); // à voir si update
         existingCurvePoint.setTerm(curvePoint.getTerm());
         existingCurvePoint.setValue(curvePoint.getValue());
 

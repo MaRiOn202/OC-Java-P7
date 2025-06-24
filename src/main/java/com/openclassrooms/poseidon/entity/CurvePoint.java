@@ -24,14 +24,16 @@ public class CurvePoint {
     @Column(name = "id")
     private Integer id;
 
-    @NotNull(message = "CurveId ne peut pas être null")
     private Integer curveId;
-    private Timestamp asOfDate;   // à la date
+    private Timestamp asOfDate;
+
     @NotNull(message = "Le terme ne peut pas être null")
     @DecimalMin(value = "0.0", message = "Le terme doit être positif ou nul")
     private Double term;
+    @NotNull(message = "Le terme ne peut pas être null")
     @DecimalMin(value = "0.0", message = "La valeur doit être positive ou nulle")
     private Double value;
+
     //@NotNull(message = "La date de création ne peut pas être nulle")
     private Timestamp creationDate;
 

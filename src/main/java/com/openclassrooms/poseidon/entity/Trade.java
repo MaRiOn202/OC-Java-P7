@@ -32,8 +32,11 @@ Trade {
     private String type;
     @PositiveOrZero(message = "La quantité doit être positive ou nulle")
     private Double buyQuantity;
+
+
+
     private Double sellQuantity;
-    //@NotNull
+
     @DecimalMin(value = "0.0", message = "Le prix d'achat doit être positif ou nul")
     private Double buyPrice;
 
@@ -43,9 +46,7 @@ Trade {
     //@NotBlank(message = "La date est obligatoire")
     private Timestamp tradeDate;
     private String security;
-    //@NotBlank(message = "Le statut est obligatoire")
     private String status;
-    //@NotBlank(message = "Le trader est obligatoire")
     private String trader;
     private String book;
     @Size(max = 50)

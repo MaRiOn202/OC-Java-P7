@@ -39,7 +39,7 @@ public class CurvePointController {
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(CurvePoint curvePoint, Model model, Principal principal) {
+    public String addCurvePointForm(CurvePoint curvePoint, Model model, Principal principal) {
 
         model.addAttribute("user", principal.getName());
         log.info("Accès à la page d'ajout de curvePoint");
@@ -70,8 +70,8 @@ public class CurvePointController {
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
-                             BindingResult result, Model model, Principal principal) {
+    public String updateCurvePoint(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
+                            BindingResult result, Model model, Principal principal) {
 
         model.addAttribute("user", principal.getName());
         if (result.hasErrors()) {
@@ -83,7 +83,7 @@ public class CurvePointController {
     }
 
     @PostMapping("/curvePoint/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model, Principal principal) {
+    public String deleteCurvePoint(@PathVariable("id") Integer id, Model model, Principal principal) {
 
         model.addAttribute("user", principal.getName());
         curvePointService.deleteCurvePoint(id);

@@ -75,15 +75,15 @@ public class GlobalExceptionHandler {
         return "error";
     }
 
-/*    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleRuleNameNotFound(UserNotFoundException e, Model model) {
+    public String handleUserNotFound(UserNotFoundException e, Model model) {
 
         log.error("User introuvable : {}", e.getMessage());
         model.addAttribute("errorMsg", "L'utilisateur demandé n'existe pas.");
         model.addAttribute("errorCode", 404);
         return "error";
-    }*/
+    }
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)

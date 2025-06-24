@@ -1,9 +1,7 @@
-package com.openclassrooms.poseidonCapitalSolution.service;
+package com.openclassrooms.poseidon.service;
 
 
-import com.openclassrooms.poseidon.entity.Bid;
 import com.openclassrooms.poseidon.entity.CurvePoint;
-import com.openclassrooms.poseidon.exception.BidNotFoundException;
 import com.openclassrooms.poseidon.exception.CurvePointNotFoundException;
 import com.openclassrooms.poseidon.repositories.CurvePointRepository;
 import com.openclassrooms.poseidon.service.serviceImpl.CurvePointServiceImpl;

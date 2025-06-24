@@ -43,7 +43,7 @@ public class RuleNameServiceImpl implements RuleNameService {
     public RuleName getRuleNameById(Integer id) {
         log.info("Récupération de l'id : {}", id);
         return ruleNameRepository.findById(id)
-                .orElseThrow(() -> new RuleNameNotFoundException("La règle n'a pas été trouvée" + id));
+                .orElseThrow(() -> new RuleNameNotFoundException("La règle n'a pas été trouvée : " + id));
     }
 
     @Transactional

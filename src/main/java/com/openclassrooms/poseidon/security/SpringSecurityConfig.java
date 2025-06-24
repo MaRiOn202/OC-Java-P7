@@ -32,7 +32,11 @@ public class SpringSecurityConfig {
         this.customUserDetailsService = customUserDetailsService;
     }
 
-
+    /**
+     * Mot de passe basé sur Bcrypt
+     * Il est utilisé pour encoder et vérifier le mot de passe des users
+     *
+     */
     @Bean
     public static PasswordEncoder passwordEncoder(){
 
@@ -40,7 +44,14 @@ public class SpringSecurityConfig {
     }
 
 
-
+    /**
+     * Méthode qui configure les règles de sécurité HTTP, notamment l'authentification,
+     * l'autorisation, la gestion de la session ainsi que la page login
+     *
+     * @param http
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -66,14 +77,20 @@ public class SpringSecurityConfig {
                 )
                 .sessionManagement(session ->
                         session
-                                .sessionCreationPolicy(SessionCreationPolicy.NEVER))
+                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 ;
 
         return http.build();
     }
 
 
-
+    /**
+     * Configure l'authenticationmanager avec customUserDetailsService ainsi que le passwordEncoder
+     * @param http
+     * @param bCryptPasswordEncoder
+     * @return l'authenticationManager configuré
+     * @throws Exception
+     */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);

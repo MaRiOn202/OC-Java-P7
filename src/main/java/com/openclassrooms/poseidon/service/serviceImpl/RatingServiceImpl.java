@@ -56,7 +56,7 @@ public class RatingServiceImpl implements RatingService {
         existingRating.setMoodysRating(rating.getMoodysRating());
         existingRating.setSandPRating(rating.getSandPRating());
         existingRating.setFitchRating(rating.getFitchRating());
-        // existingRating.setOrderNumber(rating.getOrderNumber());  // à voir
+        existingRating.setOrderNumber(rating.getOrderNumber());  // à voir
 
         log.info("Mise à jour de la notation : id={} avec les nouvelles données rating=[{}]", id, existingRating);
         // ensemble de l'objet rating dans les log ou bien par champs non sensibles ? Meilleure pratique ?

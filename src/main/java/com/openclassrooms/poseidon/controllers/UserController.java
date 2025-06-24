@@ -18,9 +18,6 @@ import java.security.Principal;
 @Controller
 public class UserController {
 
-    // repository à enlever
-    // mettre la logique métier dans les services pas les controller
-    // ne garder que les models 
 
     @Autowired
     private final UserService userService;

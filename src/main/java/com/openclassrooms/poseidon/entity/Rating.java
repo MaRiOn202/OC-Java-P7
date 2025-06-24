@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
-// toString pour sécurité
 
 @NoArgsConstructor
 @AllArgsConstructor

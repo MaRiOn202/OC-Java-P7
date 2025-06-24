@@ -1,4 +1,4 @@
-package com.openclassrooms.poseidonCapitalSolution.service;
+package com.openclassrooms.poseidon.service;
 
 
 import com.openclassrooms.poseidon.entity.Bid;
