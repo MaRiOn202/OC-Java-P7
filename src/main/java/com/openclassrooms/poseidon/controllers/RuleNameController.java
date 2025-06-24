@@ -88,7 +88,6 @@ public class RuleNameController {
 
         model.addAttribute("user", principal.getName());
         ruleNameService.deleteRuleName(id);
-        //model.addAttribute("ruleNames", ruleNameService.getAllRuleNames()); // à suppr car redirect ne conserve pas le model
         return "redirect:/ruleName/list";
     }
 }

@@ -85,6 +85,16 @@ public class GlobalExceptionHandler {
         return "error";
     }
 
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleUsernameAlreadyExists(UsernameAlreadyExistsException e, Model model) {
+
+        log.error("Username déjà utilisé : {}", e.getMessage());
+        model.addAttribute("errorMsg", "Le username existe déjà.");
+        model.addAttribute("errorCode", 409);
+        return "error";
+    }
+
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public String handleAccessDenied(AccessDeniedException e, Model model) {
