@@ -88,13 +88,12 @@ public class CurvePointControllerTest {
 
         mockMvc.perform(post("/curvePoint/validate")
                         .with(csrf())
-                .param("curveId", "")  // notnull donc error
-                .param("term", "13.0")
+                //.param("term", "13.0") // notnull donc error
                 .param("value", "12.0"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("curvePoint/add"))
                 .andExpect(model().attributeExists("user"))
-                .andExpect(model().attributeHasFieldErrors("curvePoint", "curveId"));
+                .andExpect(model().attributeHasFieldErrors("curvePoint", "term"));
 
     }
 
@@ -129,8 +128,7 @@ public class CurvePointControllerTest {
 
         mockMvc.perform(post("/curvePoint/update/{id}", id)
                         .with(csrf())
-                        //.param("curveId", String.valueOf(1)  // notnull donc error
-                        .param("term", "13.0")
+                        //.param("term", "13.0") // notnull
                         .param("value", "12.0"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("curvePoint/update"))

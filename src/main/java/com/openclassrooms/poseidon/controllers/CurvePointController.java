@@ -87,7 +87,6 @@ public class CurvePointController {
 
         model.addAttribute("user", principal.getName());
         curvePointService.deleteCurvePoint(id);
-        //model.addAttribute("curvePoints", curvePointService.getAllCurvePoints());
         return "redirect:/curvePoint/list";
     }
 

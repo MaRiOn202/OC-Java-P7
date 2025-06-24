@@ -38,9 +38,6 @@ public class UserControllerTest {
     @MockitoBean
     private UserService userService;
 
-    @MockitoBean
-    private Principal principal;
-
 
     @Test
     void testHomeShouldReturnUserList() throws Exception {
@@ -73,7 +70,7 @@ public class UserControllerTest {
 
         mockMvc.perform(post("/user/validate")
                         .param("username", "Test")
-                        .param("password", "Test")
+                        .param("password", "TestTest@20")
                         .param("fullname", "Test Test")
                         .param("role", "USER")
                         .with(csrf()))
@@ -89,13 +86,13 @@ public class UserControllerTest {
         mockMvc.perform(post("/user/validate")
                 .with(csrf())
                 .param("username", "")  // notblank
-                .param("password", "Test")
+                .param("password", "TestTest@20")
                 .param("fullname", "Test Test")
                 .param("role", "USER"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("user/add"))
-                .andExpect(model().attributeExists("user"))
-                .andExpect(model().attributeHasFieldErrors("user", "username"));
+                .andExpect(model().attributeExists("userForm"))
+                .andExpect(model().attributeHasFieldErrors("userForm", "username"));
 
     }
 
@@ -115,7 +112,7 @@ public class UserControllerTest {
         mockMvc.perform(get("/user/update/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(view().name("user/update"))
-                .andExpect(model().attribute("user", user));
+                .andExpect(model().attribute("userForm", user));
         verify(userService).getUserById(id);
 
     }
@@ -130,13 +127,13 @@ public class UserControllerTest {
         mockMvc.perform(post("/user/update/{id}", id)
                         .with(csrf())
                         .param("username", "")  // notblank
-                        .param("password", "Test")
+                        .param("password", "TestTest@20")
                         .param("fullname", "Test Test")
                         .param("role", "USER"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("user/update"))
-                .andExpect(model().attributeExists("user"))
-                .andExpect(model().attributeHasFieldErrors("user", "username"));
+                .andExpect(model().attributeExists("userForm"))
+                .andExpect(model().attributeHasFieldErrors("userForm", "username"));
 
     }
 
@@ -157,7 +154,7 @@ public class UserControllerTest {
         mockMvc.perform(post("/user/update/{id}", id)
                         .with(csrf())
                         .param("username", "Test")
-                        .param("password", "Test")
+                        .param("password", "TestTest@20")
                         .param("fullname", "Test Test")
                         .param("role", "USER"))
                 .andExpect(status().is3xxRedirection())

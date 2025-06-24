@@ -2,6 +2,7 @@ package com.openclassrooms.poseidon.service.serviceImpl;
 
 import com.openclassrooms.poseidon.entity.User;
 import com.openclassrooms.poseidon.exception.UserNotFoundException;
+import com.openclassrooms.poseidon.exception.UsernameAlreadyExistsException;
 import com.openclassrooms.poseidon.repositories.UserRepository;
 import com.openclassrooms.poseidon.service.UserService;
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
 
         if (userRepository.findByUsername(user.getUsername()) != null) {
-            throw new IllegalArgumentException("Ce username est déjà pris");
+            throw new UsernameAlreadyExistsException("Ce username est déjà pris");
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
         User userWithSameName = userRepository.findByUsername(userUpdated.getUsername());
         if (userWithSameName != null && !userWithSameName.getId().equals(id)) {
-            throw new IllegalArgumentException("Le Username est déjà utilisé !");
+            throw new UsernameAlreadyExistsException("Le Username est déjà utilisé !");
         }
 
         existingUser.setUsername(userUpdated.getUsername());

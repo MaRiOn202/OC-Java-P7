@@ -86,7 +86,6 @@ public class TradeController {
 
         model.addAttribute("user", principal.getName());
         tradeService.deleteTrade(id);
-        //model.addAttribute("trades", tradeService.getAllTrades()); // à suppr car redirect ne conserve pas le model
         return "redirect:/trade/list";
     }
 }

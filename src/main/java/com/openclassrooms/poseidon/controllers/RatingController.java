@@ -89,7 +89,6 @@ public class RatingController {
 
         model.addAttribute("user", principal.getName());
         ratingService.deleteRating(id);
-        //model.addAttribute("ratings", ratingService.getAllRatings());
         return "redirect:/rating/list";
     }
 }
