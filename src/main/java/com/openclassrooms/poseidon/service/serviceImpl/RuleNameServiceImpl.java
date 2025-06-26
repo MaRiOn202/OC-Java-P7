@@ -1,9 +1,8 @@
 package com.openclassrooms.poseidon.service.serviceImpl;
 
 import com.openclassrooms.poseidon.entity.RuleName;
-import com.openclassrooms.poseidon.exception.RatingNotFoundException;
 import com.openclassrooms.poseidon.exception.RuleNameNotFoundException;
-import com.openclassrooms.poseidon.repositories.RuleNameRepository;
+import com.openclassrooms.poseidon.repository.RuleNameRepository;
 import com.openclassrooms.poseidon.service.RuleNameService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;

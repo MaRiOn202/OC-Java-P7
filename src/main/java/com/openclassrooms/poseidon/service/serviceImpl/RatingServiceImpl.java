@@ -2,10 +2,8 @@ package com.openclassrooms.poseidon.service.serviceImpl;
 
 
 import com.openclassrooms.poseidon.entity.Rating;
-import com.openclassrooms.poseidon.entity.Trade;
 import com.openclassrooms.poseidon.exception.RatingNotFoundException;
-import com.openclassrooms.poseidon.exception.TradeNotFoundException;
-import com.openclassrooms.poseidon.repositories.RatingRepository;
+import com.openclassrooms.poseidon.repository.RatingRepository;
 import com.openclassrooms.poseidon.service.RatingService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -56,10 +54,9 @@ public class RatingServiceImpl implements RatingService {
         existingRating.setMoodysRating(rating.getMoodysRating());
         existingRating.setSandPRating(rating.getSandPRating());
         existingRating.setFitchRating(rating.getFitchRating());
-        existingRating.setOrderNumber(rating.getOrderNumber());  // à voir
+        existingRating.setOrderNumber(rating.getOrderNumber());
 
         log.info("Mise à jour de la notation : id={} avec les nouvelles données rating=[{}]", id, existingRating);
-        // ensemble de l'objet rating dans les log ou bien par champs non sensibles ? Meilleure pratique ?
         return ratingRepository.save(existingRating);
     }
 

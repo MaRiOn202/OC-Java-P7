@@ -3,7 +3,7 @@ package com.openclassrooms.poseidon.service;
 
 import com.openclassrooms.poseidon.entity.User;
 import com.openclassrooms.poseidon.exception.UserNotFoundException;
-import com.openclassrooms.poseidon.repositories.UserRepository;
+import com.openclassrooms.poseidon.repository.UserRepository;
 import com.openclassrooms.poseidon.service.serviceImpl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

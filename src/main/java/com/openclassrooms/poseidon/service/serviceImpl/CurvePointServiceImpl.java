@@ -2,10 +2,8 @@ package com.openclassrooms.poseidon.service.serviceImpl;
 
 
 import com.openclassrooms.poseidon.entity.CurvePoint;
-import com.openclassrooms.poseidon.entity.Trade;
 import com.openclassrooms.poseidon.exception.CurvePointNotFoundException;
-import com.openclassrooms.poseidon.exception.TradeNotFoundException;
-import com.openclassrooms.poseidon.repositories.CurvePointRepository;
+import com.openclassrooms.poseidon.repository.CurvePointRepository;
 import com.openclassrooms.poseidon.service.CurvePointService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;

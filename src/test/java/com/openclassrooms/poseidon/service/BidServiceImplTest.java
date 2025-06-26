@@ -3,7 +3,7 @@ package com.openclassrooms.poseidon.service;
 
 import com.openclassrooms.poseidon.entity.Bid;
 import com.openclassrooms.poseidon.exception.BidNotFoundException;
-import com.openclassrooms.poseidon.repositories.BidRepository;
+import com.openclassrooms.poseidon.repository.BidRepository;
 import com.openclassrooms.poseidon.service.serviceImpl.BidServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

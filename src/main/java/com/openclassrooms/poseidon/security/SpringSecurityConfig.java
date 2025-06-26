@@ -1,26 +1,22 @@
 package com.openclassrooms.poseidon.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
-import java.util.UUID;
 
+/**
+ * Classe de configuration de la sécurité Spring security
+ */
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
@@ -33,7 +29,7 @@ public class SpringSecurityConfig {
     }
 
     /**
-     * Mot de passe basé sur Bcrypt
+     * Mot de passe basé sur l'algorithme Bcrypt
      * Il est utilisé pour encoder et vérifier le mot de passe des users
      *
      */
@@ -49,7 +45,7 @@ public class SpringSecurityConfig {
      * l'autorisation, la gestion de la session ainsi que la page login
      *
      * @param http
-     * @return
+     * @return uen instance de securityFilterChain
      * @throws Exception
      */
     @Bean
@@ -77,7 +73,7 @@ public class SpringSecurityConfig {
                 )
                 .sessionManagement(session ->
                         session
-                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))     // session-based
                 ;
 
         return http.build();
@@ -85,7 +81,7 @@ public class SpringSecurityConfig {
 
 
     /**
-     * Configure l'authenticationmanager avec customUserDetailsService ainsi que le passwordEncoder
+     * Configure l'authenticationManager avec customUserDetailsService ainsi que le passwordEncoder
      * @param http
      * @param bCryptPasswordEncoder
      * @return l'authenticationManager configuré

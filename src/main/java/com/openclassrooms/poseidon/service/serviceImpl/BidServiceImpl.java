@@ -2,14 +2,13 @@ package com.openclassrooms.poseidon.service.serviceImpl;
 
 import com.openclassrooms.poseidon.entity.Bid;
 import com.openclassrooms.poseidon.exception.BidNotFoundException;
-import com.openclassrooms.poseidon.repositories.BidRepository;
+import com.openclassrooms.poseidon.repository.BidRepository;
 import com.openclassrooms.poseidon.service.BidService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -52,31 +51,11 @@ public class BidServiceImpl implements BidService {
     @Override
     public Bid updateBid(Integer id, Bid bid) {
 
-        // Est-ce qu'on peut modifier tout ? A voir + tard
         Bid existingBid = getBidById(id);
 
         existingBid.setAccount(bid.getAccount());
         existingBid.setType(bid.getType());
         existingBid.setBidQuantity(bid.getBidQuantity());
-
-        existingBid.setAskQuantity(bid.getAskQuantity());
-        existingBid.setBid(bid.getBid());
-        existingBid.setAsk(bid.getAsk());
-        existingBid.setBenchmark(bid.getBenchmark());
-        existingBid.setBidListDate(existingBid.getBidListDate());
-        existingBid.setCommentary(bid.getCommentary());
-        existingBid.setSecurity(bid.getSecurity());
-        existingBid.setStatus(bid.getStatus());
-        existingBid.setTrader(bid.getTrader());
-        existingBid.setBook(bid.getBook());
-        existingBid.setCreationName(bid.getCreationName());
-        existingBid.setCreationDate(existingBid.getCreationDate());
-        existingBid.setRevisionName(bid.getRevisionName());
-        existingBid.setRevisionDate(new Timestamp(System.currentTimeMillis()));
-        existingBid.setDealName(bid.getDealName());
-        existingBid.setDealType(bid.getDealType());
-        existingBid.setSourceListId(bid.getSourceListId());
-        existingBid.setSide(bid.getSide());
 
         log.info("Mise à jour de l'offre : id={} avec les nouvelles données bid=[{}]", id, existingBid);
         return bidRepository.save(existingBid);
