@@ -3,7 +3,7 @@ package com.openclassrooms.poseidon.service;
 
 import com.openclassrooms.poseidon.entity.Rating;
 import com.openclassrooms.poseidon.exception.RatingNotFoundException;
-import com.openclassrooms.poseidon.repositories.RatingRepository;
+import com.openclassrooms.poseidon.repository.RatingRepository;
 import com.openclassrooms.poseidon.service.serviceImpl.RatingServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

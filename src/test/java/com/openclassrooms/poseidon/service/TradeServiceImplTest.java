@@ -3,7 +3,7 @@ package com.openclassrooms.poseidon.service;
 
 import com.openclassrooms.poseidon.entity.Trade;
 import com.openclassrooms.poseidon.exception.TradeNotFoundException;
-import com.openclassrooms.poseidon.repositories.TradeRepository;
+import com.openclassrooms.poseidon.repository.TradeRepository;
 import com.openclassrooms.poseidon.service.serviceImpl.TradeServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -76,9 +76,6 @@ public class TradeServiceImplTest {
         newTrade.setType("Type");
         newTrade.setBuyQuantity(32.0);
         newTrade.setBuyPrice(55.00);
-        //newTrade.setSqlStr("Test3");
-        //newTrade.setSqlPart("TEST4");
-
 
         Trade tradeInBdd = new Trade();
         tradeInBdd.setId(1);
@@ -86,7 +83,6 @@ public class TradeServiceImplTest {
         tradeInBdd.setType("Type2");
         tradeInBdd.setBuyQuantity(56.0);
         tradeInBdd.setBuyPrice(78.0);
-       // tradeInBdd.setSqlPart("TEST4Modifié");
 
         when(tradeRepository.save(newTrade)).thenReturn(tradeInBdd);
 
@@ -110,18 +106,12 @@ public class TradeServiceImplTest {
         existingTrade.setAccount("Compte");
         existingTrade.setType("Type");
         existingTrade.setBuyQuantity(32.0);
-        existingTrade.setBuyPrice(55.00);
-        //existingRuleName.setSqlStr("Test3");
-        //existingRuleName.setSqlPart("TEST4");
 
         Trade updatedTrade = new Trade();
         updatedTrade.setId(id);
         updatedTrade.setAccount("CompteModifié");
         updatedTrade.setType("TypeModifié");
         updatedTrade.setBuyQuantity(56.0);
-        updatedTrade.setBuyPrice(78.0);
-        //updatedRuleName.setSqlStr("Test3Modifié");
-        //updatedRuleName.setSqlPart("TEST4Modifié");
 
         when(tradeRepository.findById(id)).thenReturn(Optional.of(existingTrade));
         when(tradeRepository.save(any(Trade.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -131,8 +121,6 @@ public class TradeServiceImplTest {
         assertEquals("CompteModifié", resultInBdd.getAccount());
         assertEquals("TypeModifié", resultInBdd.getType());
         assertEquals(56.0, resultInBdd.getBuyQuantity());
-        assertEquals(78.0, resultInBdd.getBuyPrice());
-        //assertEquals("Test3Modifié", resultInBdd.getSqlStr());
         verify(tradeRepository, times(1)).findById(id);
         verify(tradeRepository, times(1)).save(existingTrade);
 

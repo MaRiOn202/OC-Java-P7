@@ -3,7 +3,7 @@ package com.openclassrooms.poseidon.service.serviceImpl;
 import com.openclassrooms.poseidon.entity.User;
 import com.openclassrooms.poseidon.exception.UserNotFoundException;
 import com.openclassrooms.poseidon.exception.UsernameAlreadyExistsException;
-import com.openclassrooms.poseidon.repositories.UserRepository;
+import com.openclassrooms.poseidon.repository.UserRepository;
 import com.openclassrooms.poseidon.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
         existingUser.setUsername(userUpdated.getUsername());
         existingUser.setFullname(userUpdated.getFullname());
-        existingUser.setRole(userUpdated.getRole().trim());   // enlève les espaces
+        existingUser.setRole(userUpdated.getRole().trim());
 
         if (userUpdated.getPassword() != null && !userUpdated.getPassword().isEmpty()) {
             if (!existingUser.getPassword().equals(userUpdated.getPassword())) {
@@ -87,15 +87,5 @@ public class UserServiceImpl implements UserService {
         log.info("Suppression du user : {}", id);
         return true;
     }
-
-
-/*    @Override
-    public User getUserByUsername(String username) {
-
-        return userRepository.findByUsername(username);
-    }*/
-
-
-
 
 }

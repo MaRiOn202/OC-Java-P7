@@ -3,7 +3,7 @@ package com.openclassrooms.poseidon.service;
 
 import com.openclassrooms.poseidon.entity.RuleName;
 import com.openclassrooms.poseidon.exception.RuleNameNotFoundException;
-import com.openclassrooms.poseidon.repositories.RuleNameRepository;
+import com.openclassrooms.poseidon.repository.RuleNameRepository;
 import com.openclassrooms.poseidon.service.serviceImpl.RuleNameServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
