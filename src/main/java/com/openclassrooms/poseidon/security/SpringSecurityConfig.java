@@ -1,6 +1,8 @@
 package com.openclassrooms.poseidon.security;
 
 
+import com.openclassrooms.poseidon.exception.CustomAccessDeniedHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +29,9 @@ public class SpringSecurityConfig {
     public SpringSecurityConfig(CustomUserDetailsService customUserDetailsService) {
         this.customUserDetailsService = customUserDetailsService;
     }
+
+    @Autowired
+    private CustomAccessDeniedHandler customAccessDeniedHandler;
 
     /**
      * Mot de passe basé sur l'algorithme Bcrypt
@@ -59,7 +64,6 @@ public class SpringSecurityConfig {
                                         "/bidList/**", "/curvePoint/**").authenticated()
                                 .requestMatchers("/user/**").hasRole("ADMIN")
                                 .requestMatchers("/**").hasAnyRole("USER","ADMIN")
-                                //.requestMatchers("/admin/**", "/user/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                         )
                 .formLogin(formLogin ->
@@ -69,11 +73,15 @@ public class SpringSecurityConfig {
                                 .failureUrl("/login?error=true")
                                 .permitAll()
                 )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .accessDeniedHandler(customAccessDeniedHandler) // <- ici
+                )
                 .logout(LogoutConfigurer::permitAll   // méthode de référence à la place de la lambda
                 )
                 .sessionManagement(session ->
                         session
                                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))     // session-based
+
                 ;
 
         return http.build();

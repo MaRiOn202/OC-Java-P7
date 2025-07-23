@@ -25,13 +25,5 @@ public class LoginController {
         return mav;
     }
 
-    @GetMapping("error")
-    public ModelAndView error() {
-        ModelAndView mav = new ModelAndView();
-        String errorMessage= "Vous n'êtes pas autorisé à accéder à la ressource.";
-        mav.addObject("errorCode", 403);
-        mav.addObject("errorMsg", errorMessage);
-        mav.setViewName("error");
-        return mav;
-    }
+
 }

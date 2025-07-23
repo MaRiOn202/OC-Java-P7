@@ -4,10 +4,14 @@ package com.openclassrooms.poseidon.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.security.Principal;
 
 
 // exception globale pour centraliser tous les catch des controllers
@@ -99,11 +103,40 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public String handleAccessDenied(AccessDeniedException e, Model model) {
 
-        log.error("Accès refusé : {}", e.getMessage());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = (authentication != null && authentication.isAuthenticated()) ? authentication.getName() : "Utilisateur inconnu";
+
+        log.error("Accès refusé pour l'utilisateur {} : {}", username, e.getMessage());
+
+        model.addAttribute("user", username);
         model.addAttribute("errorMsg", "Vous n'êtes pas autorisé à accéder à cette ressource.");
         model.addAttribute("errorCode", 403);
         return "error";
     }
 
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
