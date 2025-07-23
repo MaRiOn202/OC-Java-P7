@@ -22,8 +22,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         request.setAttribute("errorMsg", "Vous n'êtes pas autorisé à accéder à cette ressource.");
         request.setAttribute("user", request.getUserPrincipal() != null ? request.getUserPrincipal().getName() : "Utilisateur inconnu");
 
-
-        request.getRequestDispatcher("/access-denied").forward(request, response);
+        request.getRequestDispatcher("/access-denied").forward(request, response); // renvoie à la pge
     }
 }
 

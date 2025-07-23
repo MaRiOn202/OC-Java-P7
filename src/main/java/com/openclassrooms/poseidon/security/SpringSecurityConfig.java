@@ -74,7 +74,7 @@ public class SpringSecurityConfig {
                                 .permitAll()
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
-                        .accessDeniedHandler(customAccessDeniedHandler) // <- ici
+                        .accessDeniedHandler(customAccessDeniedHandler) // appel classe handler perso
                 )
                 .logout(LogoutConfigurer::permitAll   // méthode de référence à la place de la lambda
                 )
